@@ -45,7 +45,7 @@ def main():
         for asteroid in asteroids:
             for bullet in shots:
                 if bullet.is_colliding(asteroid):
-                    asteroid.kill()
+                    asteroid.split()
                     bullet.kill()
 
         # Fill in Background Colour
