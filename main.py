@@ -31,19 +31,31 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
+        # Call update on all sprites
         for sprite in updatable:
             sprite.update(dt)
 
+        # Check for collisions between asteroids and player
         for sprite in asteroids:
             if sprite.is_colliding(player):
                 print("Game over!")
                 sys.exit()
 
+        # Check collision between asteroids and bullets
+        for asteroid in asteroids:
+            for bullet in shots:
+                if bullet.is_colliding(asteroid):
+                    asteroid.kill()
+                    bullet.kill()
+
+        # Fill in Background Colour
         screen.fill((0,0,0))
         
+        # call draw on all sprites drawable
         for sprite in drawable:
             sprite.draw(screen)
 
+        # Change the screen to show new drawables
         pygame.display.flip()
 
         # limits the framerate to 60 frames per second
